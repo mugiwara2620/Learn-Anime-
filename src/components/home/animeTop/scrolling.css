@@ -1,0 +1,53 @@
+.scrolling {
+    anchor-name: --scrolling;
+    scroll-snap-type: x mandatory;
+}
+
+.scrolling::-webkit-scrollbar {
+    display: none;
+    behavior: smooth;
+}
+
+.scrolling::scroll-button(left),
+.scrolling::scroll-button(right) {
+    content: '→';
+    font-size: 19px;
+    font-family: Consolas;
+    width: 30px;
+    height: 70px;
+    color: white;
+    font-size: xx-large;
+    background-color: black;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    padding:5px;
+    position-anchor: --scrolling;
+    position-area: right center;
+    position: fixed;
+}
+.scrolling::scroll-button(left):disabled,
+.scrolling::scroll-button(right):disabled{
+    cursor: auto;
+    opacity: 50%;
+}
+.scrolling::scroll-button(left) {
+    content: '←';
+    margin-right: 10px;
+    position-anchor: --scrolling;
+    position-area: left center;
+}
+@media screen and (width <= 1020px) {
+    .scrolling::scroll-button(left),
+.scrolling::scroll-button(right) {
+    position-area: bottom center;
+    margin-left: 130px;
+    width: 100px;
+    height: 36px;
+    
+}
+.scrolling::scroll-button(left){
+    margin-right: 230px;
+}
+}

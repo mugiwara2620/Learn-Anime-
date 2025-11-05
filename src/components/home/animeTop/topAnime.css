@@ -1,0 +1,7 @@
+@media screen and (max-width:390px) {
+    .mobile-top-anime {
+        /* flex: 0 0 100%; */
+        margin: 0 70px ;
+        margin-bottom: 70px;
+    }
+}
