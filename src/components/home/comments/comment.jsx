@@ -7,7 +7,7 @@
 export function Comment() {
   return (
     <div className="block items-center justify-center lg:flex">
-        <div className="m-9 flex items-start hover:scale-110 transition pb-2 w-90 rounded-2xl  bg-gradient-to-t from-yellow-100/60 to-purple-600/70 relative group overflow-hidden">
+        <div className="m-9 flex items-start text-yellow-50 hover:scale-110 transition pb-2 w-90 rounded-tl-[60px] rounded-br-[60px] rounded-lg  bg-gradient-to-t from-yellow-100/60 via-purple-700 to-[rgb(28, 0, 62)] relative group overflow-hidden">
       {/* Heading: centered by default, moves to top on hover */}
 
       <div className="absolute whitespace-nowrap  left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl transition-all duration-200 group-hover:top-4 group-hover:-translate-y-2 ">
@@ -23,7 +23,7 @@ export function Comment() {
         <li>Earn a mark for each summary and level up.</li>
       </ul>
     </div>
-    <div className="m-9 hover:scale-105 transition pb-2 w-90 rounded-2xl  bg-gradient-to-b from-yellow-100/60 shadow-white  to-purple-600/70 relative group overflow-hidden">
+    <div className="m-9 hover:scale-105 rounded-tr-[60px] rounded-bl-[60px] rounded-lg transition pb-2 w-90   bg-gradient-to-b from-yellow-100/60 shadow-white text-yellow-50 via-purple-700  to-[rgb(28, 0, 62)] relative group overflow-hidden">
       {/* Heading: centered by default, moves to top on hover */}
 
       <div className="absolute whitespace-nowrap  left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl transition-all duration-200 group-hover:top-4 group-hover:-translate-y-2 ">
