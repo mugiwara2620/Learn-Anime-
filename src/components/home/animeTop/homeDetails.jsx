@@ -3,9 +3,9 @@ import React from "react";
 import Slider from "react-slick";
 import './scrolling.css'
 import './topAnime.css'
+
+
 export function HomeDetails() {
-
-
 
   return (
     <div className="flex pt-12  flex-col justify-center">

@@ -2,10 +2,6 @@
 import { useParams } from 'react-router-dom'
 import {Description} from '../../components/animmeDetails/description'
 
-//vv
-
-
-
 export function AnimeDetails() {
     const {id} = useParams();
     return (

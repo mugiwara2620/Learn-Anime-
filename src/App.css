@@ -3,3 +3,11 @@ body{
   background-color: rgb(28, 0, 62);
   width: 100%;
 }
+textarea{
+  scrollbar-width: none;
+}
+.ep-scroll-bar{
+  /* scroll-behavior: smooth;
+  scrollbar-color: black; */
+  scrollbar-width: none;
+}

@@ -1,30 +1,59 @@
 
 import { ato } from '../../data/data.js'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GNavBar } from '../navBar/genNavBar.jsx';
 import './styles.css';
+import { NavLink } from 'react-router-dom';
 import { useRef } from 'react';
 import { AnimeSeason } from './animeSeasons.jsx'
 import { Episode } from './episode.jsx';
-
 export function Description({ animeId }) {
-    console.log(animeId);
     const ref = useRef();
+    const ref3 = useRef();
     const anime = ato[animeId - 1];
-    console.log(anime.posterImagePage)
     const [isShowMore, setIsShowMore] = useState(false);
+    const [ischange, setIschange] = useState(false);
+    function handel() {
+        console.log('11')
+
+        const elem = document.querySelector('.dd');
+
+        if (isShowMore) {
+            elem.classList.add('lign-acces');
+            setIsShowMore(false)
+        } else {
+            elem.classList.remove('lign-acces');
+            setIsShowMore(true)
+        }
+
+
+
+
+
+    }
+
+
+    useEffect(() => {
+        setIsShowMore(false);
+        handel();
+
+
+    }, [ischange])
+
+
+
     return (
-        <div className='flex flex-col  overflowhidden '>
+        <div className='flex wer flex-col  overflowhidden '>
 
             <GNavBar />
             <div className="text-white pt-8 flex   flex-col">
                 <div className='mx-5 w-auto lg:flex lg:flex-row'>
                     {/* image */}
-                    <div className='h-72 lg:flex lg:flex-col lg:items-center  relative md:h-96 '>
+                    <div className='h-72 lg:w-72 lg:mt-12 lg:flex lg:flex-col lg:items-center  relative md:h-96 '>
                         <img className='object-cover   w-full h-full rounded-tl-3xl rounded-br-3xl' src={anime.posterImagePage} />
                         <div className='absolute lg:static lg:pt-0 lg:pl-0  bottom-0 lg:flex lg:flex-col lg:items-center lg:bg-transparent lg:justify-center pt-14 pl-7 text-3xl rounded-tl-3xl rounded-br-3xl from-gray-900 h-36  bg-gradient-to-t to-transparent w-full'>
-                           
-                           <div className='lg:flex lg:justify-center whitespace-nowrap lg:items-center'>{anime.name}</div> 
+
+                            <div className='lg:flex lg:justify-center whitespace-nowrap lg:items-center'>{anime.name}</div>
                             <div className='text-[20px] pl-1 -mt-1'>{anime.titles.length} Episodes </div>
 
                         </div>
@@ -35,57 +64,62 @@ export function Description({ animeId }) {
                         </div>
                     </div>
                     <div className='  lg:ml-6 lg:flex-1'>
-                        <div className='mt-5 font-bold text-3xl text-yellow-100'>Episodes</div>
-                        <div className='items-center justify-center grid grid-flow-col  grid-rows-2 gap-2 '>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
-                            <div className=''><Episode/></div>
+                        <div className='mt-5 mb-5  font-bold text-3xl text-yellow-100'>Episodes</div>
+                        <div className='items-center justify-center grid grid-flow-col lg:grid-rows-2  grid-rows-3 gap-2 '>
+                            {anime.titles.map((title, i) => {
+
+                                return <NavLink  to={`/anime-details/${animeId}/ep/${i+1}`} className=''>
+                                    <Episode ep={i} title={title} />
+                                </NavLink>
+                            })}
                         </div>
-                        
+
                         {/* Description */}
-                        <div className=' lg:ml-6 lg:flex-1'>
+                        <div
+
+                            className=' lg:ml-6 lg:flex-1'>
 
                             <div className='font-bold mt-4  text-[16px]'>Overview:</div>
-                            <div className=' lg:h-full relative h-32 flex flex-col'>
+                            {/* description fix */}
+                            <div className=' lg:h-full max-lg:flex lg:hidden lg:lign-acces  relative h-32  flex-col'>
                                 <div
-                                    ref={ref}
-                                    className=' overflow-auto w-full '>
+                                    className={`overflow-auto w-full `}>
+                                    {anime.description}
+                                </div>
+                            </div>
+                            {/* description mobile */}
+                            <div className=' lg:h-full  lg:flex max-lg:hidden relative h-32 flex flex-col'>
+                                <div
+                                    className={`dd lign-acces   overflow-auto w-full `}>
                                     {anime.description}
                                 </div>
                                 <div
                                     onClick={() => {
-                                        if (!isShowMore) {
-                                            ref.current.classList.remove('lign-acces');
-                                            setIsShowMore(true);
-                                        } else {
-                                            ref.current.classList.add('lign-acces');
-                                            setIsShowMore(false);
-                                        }
+                                        setIschange(!ischange);
                                     }}
-                                    className='text-[15px] invisible lg:visible font-bold cursor-pointer '>{isShowMore ? " - Less" : "+ More"}</div>
+                                    className='text-[15px]  font-bold cursor-pointer '>{isShowMore ? " - Less" : "+ More"}</div>
                             </div>
-                            
+
 
                         </div>
-                        <div className='flex max-w-[770px] '>
-                            <div className=' flex  overflow-y-hidden overflow-x-auto'>
+                        {/* Seasons */}
+                        <div className='flex relative items-center anime-seasons w-full '>
+                            <div
+                                ref3={ref3}
+                                className='anime-seasons  scrolling-seasons  mx-auto lg:max-w-[700px] w-[900px]  flex gap-4 pl-5 snap-x overflow-y-hidden overflow-x-auto'
+                                onClick={() => {
+                                    // win.addEventListener('click', () => {
+                                    //     console.log(win);
+                                    //     win.scrollTo({
+                                    //         top: 20
+                                    //     });
+
+                                    //     console.log(document.scrollLeft);
+                                    // })
+                                }}>
                                 {[1, 2, 3, 4].map((i) => {
                                     return (
-                                        <AnimeSeason num={i} />
+                                        <AnimeSeason num={i} animeId={animeId} />
                                     )
                                 })}
                             </div>

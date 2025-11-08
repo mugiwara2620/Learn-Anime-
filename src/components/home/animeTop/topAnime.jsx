@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { ato } from "../../../data/data"
 import './topAnime.css';
+
 export function TopAnime({ num }) {
     const anime = ato[num - 1];
 
