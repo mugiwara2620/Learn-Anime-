@@ -95,13 +95,10 @@ export function Ep() {
                     <div className={`flex  lg:hidden flex-col items-center h-full justify-center  gap-1 `}>
                         <NavLink
                             className="h-8   bg-yellow-200/90  pr-4  rounded-sm text-xl px-3  "
-
                             to={`/anime-details/${id}/ep/${Number(epId) - 1}`}>
                             <span className=" text-[21px]">◀</span>
                         </NavLink>
                         <div className="text-white cursor-pointer hover:underline">ep.{Number(epId) - 1 > 0 && Number(epId) - 1}</div>
-
-
                     </div>
                     <div className="lg:h-40 flex w-full items-center  flex-col lg:mt-4">
                         <div className="text-white  lg:flex lg:ml-2 w-full font-bold text-24 mb-1">Episodes</div>
@@ -110,15 +107,10 @@ export function Ep() {
                                 return (
                                     <div className="w-30  text-yellow-100  p-2 rounded-md  bordesr-[2px] snap-start   bg-black">ep{i + 1}. {title}</div>)
                             })}
-
-
                         </div>
                     </div>
-
                     <div className="flex lg:hidden  flex-col items-center h-full justify-center  gap-1  ">
-
                         <NavLink
-
                             to={`/anime-details/${id}/ep/${Number(epId) + 1}`}
                             className="h-8   bg-yellow-200/90  pl-4  rounded-sm text-xl px-3  ">
                             <span className=" text-[21px]">▶</span>
