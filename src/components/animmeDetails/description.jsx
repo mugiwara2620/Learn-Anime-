@@ -40,6 +40,16 @@ export function Description({ animeId }) {
 
     }, [ischange])
 
+    function EpTitle({i,title}) {
+        const [isOpen, setIsOpen] = useState(true);
+
+        return (
+
+            <NavLink to={`/anime-details/${animeId}/ep/${i + 1}`} className='pb-2 '>
+                <Episode ep={i + 1} title={title} isOpen={isOpen} setIsOpen={setIsOpen} />
+            </NavLink>
+        )
+    }
 
 
     return (
@@ -64,22 +74,9 @@ export function Description({ animeId }) {
                         </div>
                     </div>
                     <div className='  lg:ml-6 lg:flex-1'>
-                        <div className='mt-5 mb-5   font-bold text-3xl text-yellow-100'>Episodes</div>
-                        <div className='mx-auto  grid grid-cols-3 lg:grid-cols-4 '>
-                            {anime.titles.map((title, i) => {
-
-                                return (
-                                <NavLink  to={`/anime-details/${animeId}/ep/${i+1}`} className='pb-2 '>
-                                    <Episode ep={i} title={title} />
-                                </NavLink>)
-                            })}
-                        </div>
-
                         {/* Description */}
                         <div
-
                             className=' lg:ml-6 lg:flex-1'>
-
                             <div className='font-bold mt-4  text-[16px]'>Overview:</div>
                             {/* description fix */}
                             <div className=' lg:h-full max-lg:flex lg:hidden lg:lign-acces  relative h-32  flex-col'>
@@ -103,28 +100,37 @@ export function Description({ animeId }) {
 
 
                         </div>
-                        {/* Seasons */}
-                        <div className='flex relative items-center anime-seasons w-full '>
-                            <div
-                                ref3={ref3}
-                                className='anime-seasons  scrolling-seasons  mx-auto  lg:max-w-[700px] w-[900px]  flex gap-4   snap-x overflow-y-hidden overflow-x-auto'
-                                onClick={() => {
-                                    // win.addEventListener('click', () => {
-                                    //     console.log(win);
-                                    //     win.scrollTo({
-                                    //         top: 20
-                                    //     });
+                        <div className='mt-5 mb-5   font-bold text-3xl text-yellow-100'>Episodes</div>
+                        <div className='mx-auto  grid grid-cols-3 lg:grid-cols-4 '>
+                            {anime.titles.map((title, i) => {
+                                return <EpTitle title={title} i={i} />
+                            }
+                            )}
+                        </div>
 
-                                    //     console.log(document.scrollLeft);
-                                    // })
-                                }}>
-                                {[1, 2, 3, 4].map((i) => {
-                                    return (
-                                        <AnimeSeason num={i} animeId={animeId} />
-                                    )
-                                })}
+
+                        {/* Seasons */}
+                        <div className='flex-col flex'>
+                            <div className='mt-5  font-bold text-3xl text-yellow-100'>Seasons</div>
+
+                            <div className='flex  relative items-center anime-seasons w-full '>
+
+                                <div
+                                    ref3={ref3}
+                                    className='anime-seasons  scrolling-seasons  mx-auto lg:mx-8 lg:w-[800px]  flex gap-4   snap-x overflow-y-hidden overflow-x-auto'
+                                    onClick={() => { }}>
+                                    {[1, 2, 3, 4].map((i) => {
+                                        return (
+                                            <AnimeSeason num={i} animeId={animeId} />
+
+
+
+                                        )
+                                    })}
+                                </div>
                             </div>
                         </div>
+
 
                     </div>
                 </div>

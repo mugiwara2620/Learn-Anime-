@@ -5,7 +5,7 @@ import './scrolling.css'
 import './topAnime.css'
 
 
-export function HomeDetails() {
+export function HomeDetails({ animesDescription, setAnimesDescription }) {
 
   return (
     <div className="flex pt-12  flex-col justify-center">
@@ -13,13 +13,17 @@ export function HomeDetails() {
       <div className="px-10  mobile-top-anime scrolling flex gap-11 overflow-x-auto overflow-y-hidden w-xl mx-10  lg:mx-28  -mt-6 scroll-m-0 scroll-smooth grid-cols-1 mb-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
         {[1, 2, 3, 4].map((i) => {
           return (
-            <TopAnime num={i} />
+            <TopAnime
+              num={i}
+              animesDescription={animesDescription}
+              setAnimesDescription={setAnimesDescription} />
           )
         })
         }
         {[1, 2, 3, 4].map((i) => {
           return (
-            <TopAnime num={i} />
+            <TopAnime
+              num={i} />
           )
         })
         }
@@ -32,7 +36,7 @@ export function HomeDetails() {
 
       </div>
       <div>
-        
+
       </div>
     </div>
 
