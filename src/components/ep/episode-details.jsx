@@ -2,23 +2,24 @@ import { GNavBar } from "../navBar/genNavBar";
 import { NavBar } from "../navBar/navBar";
 import { ato } from "../../data/data";
 import { NavLink, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export function Ep() {
+export function Ep({ descriptionList }) {
     const { id, epId } = useParams();
     const anime = ato[id - 1];
     const titles = anime.titles;
-    const [value, setvalue] = useState();
+    const [value, setvalue] = useState(descriptionList[Number(id)][Number(epId)]);
     const [isDone, setIsDone] = useState(false);
     const [isEpisodes, setIsEpisodes] = useState(false);
     console.log(anime);
-    console.log(anime)
+    console.log(anime);
 
     function summryDone() {
         setIsDone(!isDone);
     }
-
-
+    useEffect(() => {
+        setvalue(descriptionList[Number(id)][Number(epId)]);
+    }, [descriptionList[Number(id)][Number(epId)]])
 
 
     return (
@@ -47,7 +48,8 @@ export function Ep() {
                             value={value}
                             placeholder="Enter you summry..."
                             onChange={(event) => {
-                                setvalue(event.target.value)
+                                descriptionList[Number(id)][Number(epId)] = event.target.value;
+                                setvalue(event.target.value);
                             }}
 
                             onKeyDown={(e) => {
@@ -91,34 +93,61 @@ export function Ep() {
                     </div>
                 </div>
                 {/* ep list */}
-                <div className="flex lg:32 mt-5 lg:flex-1 lg:mx-0 lg:w-[100px]   mx-32  h-40 gap-6 justify-between ">
-                    <div className={`flex  lg:hidden flex-col items-center h-full justify-center  gap-1 `}>
-                        <NavLink
-                            className="h-8   bg-yellow-200/90  pr-4  rounded-sm text-xl px-3  "
-                            to={`/anime-details/${id}/ep/${Number(epId) - 1}`}>
-                            <span className=" text-[21px]">◀</span>
-                        </NavLink>
-                        <div className="text-white cursor-pointer hover:underline">ep.{Number(epId) - 1 > 0 && Number(epId) - 1}</div>
-                    </div>
-                    <div className="lg:h-40 flex w-full items-center  flex-col lg:mt-4">
-                        <div className="text-white  lg:flex lg:ml-2 w-full font-bold text-24 mb-1">Episodes</div>
-                        <div className="shadow-white overflow-ellipsis overflow-x-hidden lg:h-64 ep-scroll-bar w-full  max-w-[500px] flex   flex-col gap-1 overflow-y-auto snap-y">
-                            {titles && titles.map((title, i) => {
-                                return (
-                                    <div className="w-30  text-yellow-100  p-2 rounded-md  bordesr-[2px] snap-start   bg-black">ep{i + 1}. {title}</div>)
-                            })}
+                <div className="  w-full flex flex-col h-32 mx-2 mr-4">
+                    <div className=" lg:flex lg:ml-2 text-yellow-200 text-2xl  font-bold text-24 mb-1">Episodes</div>
+                    <div className="items-center m-auto justify-center flex">
+                        <div className="flex lg:32 h-[134px] w-full mt-5 gap-2  lg:flex-1 lg:mx-0 lg:w-[100px]   ">
+                            <div className={`flex  lg:hidden mt-3 flex-col items-center h-full justify-center  gap-0 `}>
+                                {
+                                    Number(epId) - 1 > 0 ?
+
+                                        <NavLink
+                                            className="h-8   bg-yellow-200/90  pr-4  rounded-sm text-xl px-3  "
+                                            to={`/anime-details/${id}/ep/${Number(epId) - 1}`}>
+                                            <span className=" text-[21px]">◀</span>
+                                        </NavLink> :
+                                        <div
+                                            className="h-8   bg-yellow-200/30  pr-4  rounded-sm text-xl px-3  "
+                                        >
+                                            <span className=" text-[21px]">◀</span>
+                                        </div>
+                                }
+                                <div className="text-white cursor-pointer hover:underline">ep.{Number(epId) - 1 > 0 && Number(epId) - 1}</div>
+                            </div>
+                            <div className="lg:h-40  flex   items-center  flex-col lg:mt-4">
+
+                                <div className="shadow-white max-w-96  flex-1 overflow-ellipsis overflow-x-hidden lg:h-64 ep-scroll-bar  flex   flex-col gap-1 overflow-y-auto snap-y">
+                                    {titles && titles.map((title, i) => {
+                                        return (
+                                            <div className="truncate text-ellipsis pt-2 pb-8  text-yellow-100  p-2   border-[1px] snap-start whitespace-nowrap  bg-black">ep{i + 1}. {title}</div>)
+                                    })}
+                                </div>
+                            </div>
+                            <div className="flex lg:hidden mt-3 flex-col items-center h-full justify-center  gap-0  ">
+                                {
+
+                                    Number(epId) + 1 < anime.titles.length ?
+
+                                        <NavLink
+                                            to={`/anime-details/${id}/ep/${Number(epId) + 1}`}
+                                            className="h-8   bg-yellow-200/90  pl-4  rounded-sm text-xl px-3  ">
+                                            <span className=" text-[21px]">▶</span>
+                                        </NavLink> :
+                                        <div
+                                            className="h-8   bg-yellow-200/30  pr-4  rounded-sm text-xl px-3  "
+                                        >
+                                            <span className=" text-[21px]">▶</span>
+                                        </div>
+                                }
+
+                                <div className="text-white cursor-pointer hover:underline">ep. {Number(epId) + 1}</div>
+                            </div>
+
                         </div>
-                    </div>
-                    <div className="flex lg:hidden  flex-col items-center h-full justify-center  gap-1  ">
-                        <NavLink
-                            to={`/anime-details/${id}/ep/${Number(epId) + 1}`}
-                            className="h-8   bg-yellow-200/90  pl-4  rounded-sm text-xl px-3  ">
-                            <span className=" text-[21px]">▶</span>
-                        </NavLink>
-                        <div className="text-white cursor-pointer hover:underline">ep. {Number(epId) + 1}</div>
                     </div>
 
                 </div>
+
 
 
 

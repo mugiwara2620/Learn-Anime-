@@ -1,5 +1,6 @@
 import { Routes, Route,BrowserRouter } from 'react-router-dom'
 import './App.css';
+import {descriptionList} from './data/data.js'
 import { Home } from './pages/home/home';
 import { ListPage } from './pages/list-page/listPage';
 import { AnimeDetails } from './pages/anime-page/anime-details';
@@ -15,7 +16,7 @@ function App() {
           />
           <Route 
           path='/anime-details/:id/ep/:epId'
-          element={<Ep/>} />
+          element={<Ep descriptionList={descriptionList}/>} />
           <Route
             path='/'
             element={<Home />}

@@ -134,3 +134,8 @@ export const ato = [
     ]
   }
 ]
+
+export const descriptionList = ato.map((season)=>{
+  return  Array(season.titles.length).fill('')
+})
+console.log(descriptionList);

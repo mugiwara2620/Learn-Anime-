@@ -1,4 +1,3 @@
-
 import { ato } from '../../data/data.js'
 import { useEffect, useState } from 'react';
 import { GNavBar } from '../navBar/genNavBar.jsx';
@@ -25,36 +24,23 @@ export function Description({ animeId }) {
             elem.classList.remove('lign-acces');
             setIsShowMore(true)
         }
-
-
-
-
-
     }
-
-
     useEffect(() => {
         setIsShowMore(false);
         handel();
-
-
     }, [ischange])
 
     function EpTitle({i,title}) {
         const [isOpen, setIsOpen] = useState(true);
 
         return (
-
             <NavLink to={`/anime-details/${animeId}/ep/${i + 1}`} className='pb-2 '>
                 <Episode ep={i + 1} title={title} isOpen={isOpen} setIsOpen={setIsOpen} />
             </NavLink>
         )
     }
-
-
     return (
         <div className='flex wer flex-col  overflowhidden '>
-
             <GNavBar />
             <div className="text-white pt-8 flex   flex-col">
                 <div className='mx-5 w-auto lg:flex lg:flex-row'>
